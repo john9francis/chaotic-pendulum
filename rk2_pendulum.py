@@ -19,11 +19,15 @@ class Pendulum:
   omegad = None
   q = None
 
-
   # lists
   times = []
   thetas = []
   omegas = []
+
+  # flags
+  # reset theta keeps theta between 0 and 2*pi
+  reset_theta = False
+
 
   def __init__(self, fDriving, fDamping, omegaDriving) -> None:
     self.set_params(fDriving, fDamping, omegaDriving)
@@ -44,6 +48,12 @@ class Pendulum:
 
   def set_dt(self, new_dt):
     self.dt = new_dt
+
+  def set_reset_theta(self, new_bool):
+    self.reset_theta = new_bool
+
+
+
 
   def set_params(self, fDriving, fDamping, omegaDriving):
     self.fd = fDriving
@@ -126,6 +136,13 @@ class Pendulum:
 
       theta = updated_array[0]
       omega = updated_array[1]
+
+      # keep theta between -pi and pi if desired
+      if self.reset_theta:
+        if theta > np.pi:
+          theta -= np.pi
+        if theta < -np.pi:
+          theta += np.pi
 
       self.thetas.append(theta)
       self.omegas.append(omega)
