@@ -38,6 +38,12 @@ class Pendulum:
   
   def get_time_array(self):
     return np.array(self.times)
+  
+  def set_length(self, length):
+    self.L = length
+
+  def set_dt(self, new_dt):
+    self.dt = new_dt
 
   def set_params(self, fDriving, fDamping, omegaDriving):
     self.fd = fDriving
@@ -120,13 +126,6 @@ class Pendulum:
 
       theta = updated_array[0]
       omega = updated_array[1]
-      '''
-      # make sure theta stays between 0 an 2*pi
-      if theta > 2*np.pi:
-        theta -= 2*np.pi
-      if theta < 0:
-        theta += 2*np.pi
-      '''
 
       self.thetas.append(theta)
       self.omegas.append(omega)
