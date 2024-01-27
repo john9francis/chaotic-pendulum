@@ -21,9 +21,10 @@ $$\frac{d\omega}{dt} = -\frac{g}{l}\sin \theta - q \frac{d\theta}{dt} + F_D \sin
 
 $$\frac{d\theta}{dt} = \omega$$
 
-Now, if the driving force is small, there isn't much chaos. The system simply settles into a periodic rhythm. If we change the initial conditions, we don't see much difference.
+Now, if the driving force is small, there isn't much chaos. The system simply settles into a periodic rhythm. If we change the initial conditions, we don't see much difference. Here, we have plotted the theta vs. time graphs for a pendulum with driving force 0.2 vs. 0.3.
 
 ![non-chaotic driven-damped pendulum fd = .2, theta vs time](outputs/fig_3_5.png)
+![non-chaotic driven-damped pendulum fd = .3, theta vs time](outputs/fig_3_5_modified.png)
 
 
 
