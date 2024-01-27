@@ -26,9 +26,25 @@ Now, if the driving force is small, there isn't much chaos. The system simply se
 ![non-chaotic driven-damped pendulum fd = .2, theta vs time](outputs/fig_3_5.png)
 ![non-chaotic driven-damped pendulum fd = .3, theta vs time](outputs/fig_3_5_modified.png)
 
+When we start increasing the driving force, we start to see some chaos. Here is the same pendulum but this time with a driving force of 1.2. We will also compare with a graph of driving force=1.2001 just to show how much the initial conditions affect the future behavior. 
 
+![chaotic pendulum fd=1.2, theta vs time](outputs/fig_3_6.png)
+![chaotic pendulum fd=1.2, theta vs time](outputs/fig_3_6_modified.png)
 
+# Patterns in chaos
 
+With a little more investigation, we can find some patterns to the chaos. Consider the phase-space plot of the same driven-damped pendulum. This plot shows theta vs. omega, and we start seeing some interesting patterns showing up.
+
+![phase space plot of a chaotic pendulum](outputs/fig_3_8.png)
+
+One interesting pattern that has been found in chaos theory is the poincare plot. This is a phase space plot of theta versus omega, but only for the values when the driving frequency is "in phase" with time. In other words, these are only the points where $\Omega_D = 2*\pi*n*t$, where n is an integer. We surprisingly see a very ordered graph. The interesting thing here is that when we don't have chaos, or when the driving force is low, the poincare plot only shows one point. But as soon as chaos is introduced, we see this distinct line of points. 
+
+![poincare plot](outputs/poincare.png)
+
+# The bifurcation graph
+A natural question to arise is, "at what driving force does the chaos start to occur?" We can determine this with the use of a bifurcation plot. The bifurcation plot is a plot of poincare data, or only data where the driving force is in phase with time. It also plots theta vs. time instead of theta vs. omega. From this plot we see the theta vs. time is at the same point every time for lower driving forces, even though there is chaos at those values. However, when we increase driving force, the plot diverges into two branches. As we continue to increase driving force, the plot diverges even more until eventually it is in true chaos. 
+
+![bifurcation plot for driving forces 1.35 to 1.5](outputs/bifurcation.png)
 
 # Coding this problem
 
