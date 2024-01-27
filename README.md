@@ -41,6 +41,8 @@ One interesting pattern that has been found in chaos theory is the poincare plot
 
 ![poincare plot](outputs/poincare.png)
 
+# The bifurcation graph
+A natural question to arise is, "at what frequency does chaos start to occur?" We can determine this with the use of a bifurcation plot. The bifurcation plot is a plot where 
 
 # Coding this problem
 
