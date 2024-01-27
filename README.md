@@ -26,6 +26,11 @@ Now, if the driving force is small, there isn't much chaos. The system simply se
 ![non-chaotic driven-damped pendulum fd = .2, theta vs time](outputs/fig_3_5.png)
 ![non-chaotic driven-damped pendulum fd = .3, theta vs time](outputs/fig_3_5_modified.png)
 
+When we start increasing the driving force, we start to see some chaos. Here is the same pendulum but this time with a driving force of 1.2. We will also compare with a graph of driving force=1.2001 just to show how much the initial conditions affect the future behavior. 
+
+![chaotic pendulum fd=1.2, theta vs time](outputs/fig_3_6.png)
+![chaotic pendulum fd=1.2, theta vs time](outputs/fig_3_6_modified.png)
+
 
 
 
