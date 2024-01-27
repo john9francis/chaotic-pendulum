@@ -31,7 +31,11 @@ When we start increasing the driving force, we start to see some chaos. Here is 
 ![chaotic pendulum fd=1.2, theta vs time](outputs/fig_3_6.png)
 ![chaotic pendulum fd=1.2, theta vs time](outputs/fig_3_6_modified.png)
 
+# Patterns in chaos
 
+With a little more investigation, we can find some patterns to the chaos. Consider the phase-space plot of the same driven-damped pendulum. This plot shows theta vs. omega, and we start seeing some interesting patterns showing up.
+
+![phase space plot of a chaotic pendulum](outputs/fig_3_8.png)
 
 
 
