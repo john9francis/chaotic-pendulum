@@ -104,29 +104,36 @@ def create_poincare_plot():
   # reset theta to see the pattern
   pendulum.set_reset_theta(True)
 
-  pendulum.run_rk2(simulationTime, th_initial=theta_i)
-
-  # now only save the data points when omegad is in phase
-  poincare_thetas = []
-  poincare_omegas = []
-  
-  original_thetas = pendulum.get_theta_array()
-  original_omegas = pendulum.get_omega_array()
-  original_times = pendulum.get_time_array()
-
-  n = 1
-
-  for i, time in enumerate(original_times):
-    if abs(time - n*2*np.pi/omegaDriving) < dt/2:
-      poincare_thetas.append(original_thetas[i])
-      poincare_omegas.append(original_omegas[i])
-      n += 1
-
+  pendulum.run_poincare(500, th_initial=theta_i)
 
   # now plot
-  plt.plot(poincare_thetas, poincare_omegas, 'g.')
+  plt.plot(pendulum.get_theta_array(), pendulum.get_omega_array(), 'g.')
   plt.show()
 
+
+def create_bifurcation_plot():
+  '''
+  This run will be more computationally expensive.
+  We need to do a run for 400 drive periods, or until
+  n = 400. We discard the first 300, so the oscillations can settle. 
+  Then, we plot only thetas in phase with driving 
+  force, much like we did in the poincare plot. Then, 
+  we repeat for many driving forces from 1.35 to 1.5.
+  Finally, plot Fd vs. theta.
+  '''
+
+  fDriving = 1.2
+  fDamping = .5
+  omegaDriving = 2/3
+
+  thetas = []
+  fds = []
+
+  pendulum = rk2_pendulum.Pendulum(fDriving, fDamping, omegaDriving)
+
+  # do 400 rounds while omega is in phase with t
+  n = 1
+  #while n < 400:
 
 
 if __name__ == "__main__":

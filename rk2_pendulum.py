@@ -148,3 +148,39 @@ class Pendulum:
       self.omegas.append(omega)
 
       self.times.append(self.times[-1] + self.dt)
+
+
+
+  def run_poincare(self, rounds, t_initial=0, th_initial=.2, om_initial=0):
+    '''
+    Takes in 'rounds' which is how many times
+    time is in phase with the driving frequency. 
+    '''
+
+    # step one: convert rounds into time.
+    time = 2*np.pi*rounds/self.omegad
+
+    self.run_rk2(time, th_initial=th_initial)
+
+    # now only save the data points when omegad is in phase
+    poincare_thetas = []
+    poincare_omegas = []
+
+    original_thetas = self.get_theta_array()
+    original_omegas = self.get_omega_array()
+    original_times = self.get_time_array()
+
+    n = 1
+
+    for i, time in enumerate(original_times):
+      if abs(time - n*2*np.pi/self.omegad) < self.dt/2:
+        poincare_thetas.append(original_thetas[i])
+        poincare_omegas.append(original_omegas[i])
+        n += 1
+
+
+    # save everything to member variables
+    self.thetas = poincare_thetas
+    self.omegas = poincare_omegas
+
+    
