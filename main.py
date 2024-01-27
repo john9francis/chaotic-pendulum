@@ -3,7 +3,8 @@ import numpy as np
 import rk2_pendulum
 
 def main():
-  recreate_fig_3_6()
+  create_poincare_plot()
+  pass
 
 
 def recreate_fig_3_5():
@@ -20,12 +21,17 @@ def recreate_fig_3_5():
 
   # initialize our pendulum
   pendulum = rk2_pendulum.Pendulum(fDriving, fDamping, omegaDriving)
+
+  # run an runge kutta 2 for 20 seconds
   pendulum.run_rk2(20)
+
+  # plot theta vs time
   plt.plot(pendulum.get_time_array(), pendulum.get_theta_array())
   plt.title(f"non-chaotic driven damped pendulum Fd = {fDriving}")
   plt.xlabel("time (s)")
   plt.ylabel("theta (radians)")
   plt.show()
+
 
 def recreate_fig_3_6():
   '''
@@ -33,8 +39,8 @@ def recreate_fig_3_6():
   Slightly adjusting initial conditions dramatically
   changes the outcome. 
   '''
-  # define our driving and damping forces
-  fDriving = 1.2001
+  # define our initial conditions to match fig 3.6
+  fDriving = 1.2
   fDamping = .5
   omegaDriving = 2/3
   pendulumLength = 9.8
@@ -47,7 +53,10 @@ def recreate_fig_3_6():
   # set parameters
   pendulum.set_length(pendulumLength)
 
+  # run our rk2 simulation, specifying our initial theta
   pendulum.run_rk2(simulationTime, th_initial=theta_i)
+
+  # plot theta vs. time
   plt.plot(pendulum.get_time_array(), pendulum.get_theta_array())
   plt.title(f"Chaotic driven damped pendulum Fd = {fDriving}")
   plt.xlabel("time (s)")
@@ -57,7 +66,8 @@ def recreate_fig_3_6():
 
 def recreate_fig_3_8():
   '''
-  This figure shows a chaotic pendulum theta vs. omega.
+  This figure shows a chaotic pendulum 
+  theta vs. omega. (a phase diagram)
   It shows an interesting pattern and shape. 
   '''
   # define our driving and damping forces
@@ -75,9 +85,14 @@ def recreate_fig_3_8():
   pendulum.set_length(pendulumLength)
 
   # reset theta to see the pattern
+  # (this function makes sure theta stays
+  # between -pi and pi)
   pendulum.set_reset_theta(True)
 
+  # run rk2 simulation
   pendulum.run_rk2(simulationTime, th_initial=theta_i)
+
+  # plot theta vs. omega
   plt.plot(pendulum.get_theta_array(), pendulum.get_omega_array(), "r,")
   plt.title(f"Phase space plot for the chaotic pendulum Fd = {fDriving}")
   plt.xlabel("theta (radians)")
@@ -110,7 +125,9 @@ def create_poincare_plot():
   # reset theta to see the pattern
   pendulum.set_reset_theta(True)
 
-  pendulum.run_poincare(500, th_initial=theta_i)
+  # run a poincare simulation with 500 periods
+  drivingPeriods = 500
+  pendulum.run_poincare(drivingPeriods, th_initial=theta_i)
 
   # now plot
   plt.plot(pendulum.get_theta_array(), pendulum.get_omega_array(), 'g.')
@@ -120,7 +137,12 @@ def create_poincare_plot():
   plt.show()
 
 
-def plot_theta_vs_time(fd):
+def recreate_fig_3_10(fd=1.4):
+  '''
+  This figure shows theta vs. time, showing that even in a
+  chaotic system there can arise patterns. This takes in 
+  optional driving force (fd) and plots rk2 theta vs. time
+  '''
   # define our driving and damping forces
   fDamping = .5
   omegaDriving = 2/3
@@ -135,13 +157,16 @@ def plot_theta_vs_time(fd):
   pendulum.set_length(pendulumLength)
   pendulum.set_reset_theta(True)
 
+  # run rk2 simulation
   pendulum.run_rk2(simulationTime, th_initial=theta_i)
 
+  # plot theta vs time
   plt.plot(pendulum.get_time_array(), pendulum.get_theta_array(),)
   plt.title(f"Driving force: {fd}")
   plt.xlabel("time (s)")
   plt.ylabel("theta (radians)")
   plt.show()
+
 
 
 def create_bifurcation_plot():
@@ -162,9 +187,12 @@ def create_bifurcation_plot():
   pendulumLength = 9.8
   theta_i = .2
 
+  # total runs and runs to keep can be adjusted
+  # for better computational performance
   total_runs = 100
   runs_to_keep = 40
 
+  # get an arrays of driving forces for our range
   fds = np.linspace(fd_initial, fd_final, 100)
 
   # init pendulum
@@ -172,9 +200,10 @@ def create_bifurcation_plot():
   pendulum.set_length(pendulumLength)
   pendulum.set_reset_theta(True)
 
-  # start looping through fd's
+  # start looping through driving force array
   for fd in fds:
-    # set driving force to fd
+
+    # set pendulum's driving force to fd
     pendulum.set_params(fd, fDamping, omegaDriving)
 
     # run a poincare simulation
@@ -183,7 +212,7 @@ def create_bifurcation_plot():
     # discard the first data points to remove randomness
     thetas = pendulum.get_theta_array()[runs_to_keep:]
 
-    # plot points
+    # plot a dot for each theta corresponding to fd
     for theta in thetas:
       plt.plot(fd, theta, '.')
 
