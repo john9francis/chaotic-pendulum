@@ -8,7 +8,7 @@ Certain systems don't behave in such a predictable way. These are called chaotic
 
 Here we will explore a very simple chaotic system, the driven-damped pendulum. A driven-damped pendulum is an ideal pendulum, which periodically swings from the driving of gravity, and adds a linear damping force (friction or simplified air drag) as well as a periodic driving force. This periodic driving force is sinusodal, meaning that it has a period (omega) when it drives strongest. The driving force can be compared to somebody bumping the pendulum every one second periodically. The equations of motion for this pendulum are as follows:
 
-$$f = ma$$
+$$ \frac{d^2\theta}{dt^2} = -\frac{g}{l}\sin \theta - q \frac{d\theta}{dt} + F_D \sin (\Omega_Dt)$$
 
 
 
