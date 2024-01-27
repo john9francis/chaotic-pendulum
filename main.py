@@ -3,9 +3,8 @@ import numpy as np
 import rk2_pendulum
 
 def main():
-  
-  plot_theta_vs_time(1.35)
-  pass
+  create_bifurcation_plot()
+
 
 def recreate_fig_3_5():
   '''
@@ -89,7 +88,6 @@ def create_poincare_plot():
   fDamping = .5
   omegaDriving = 2/3
   pendulumLength = 9.8
-  simulationTime = 5000
   theta_i = .2
   dt = .01
 
@@ -143,7 +141,7 @@ def create_bifurcation_plot():
   '''
 
   fd_initial = 1.35
-  fd_final = 1.5
+  fd_final = 1.49
   fDamping = .5
   omegaDriving = 2/3
   pendulumLength = 9.8
@@ -157,6 +155,7 @@ def create_bifurcation_plot():
   # init pendulum
   pendulum = rk2_pendulum.Pendulum(fd_initial, fDamping, omegaDriving)
   pendulum.set_length(pendulumLength)
+  pendulum.set_reset_theta(True)
 
   # start looping through fd's
   for fd in fds:
