@@ -37,6 +37,9 @@ With a little more investigation, we can find some patterns to the chaos. Consid
 
 ![phase space plot of a chaotic pendulum](outputs/fig_3_8.png)
 
+One interesting pattern that has been found in chaos theory is the poincare plot. This is a phase space plot of theta versus omega, but only for the values when the driving frequency is "in phase" with time. In other words, these are only the points where $\Omega_D = 2*\pi*n*t$, where n is an integer. We surprisingly see a very ordered graph. The interesting thing here is that when we don't have chaos, or when the driving force is low, the poincare plot only shows one point. But as soon as chaos is introduced, we see this distinct line of points. 
+
+![poincare plot](outputs/poincare.png)
 
 
 # Coding this problem
