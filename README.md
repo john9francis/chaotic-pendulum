@@ -12,7 +12,7 @@ $$ \frac{d^2\theta}{dt^2} = -\frac{g}{l}\sin \theta - q \frac{d\theta}{dt} + F_D
 
 Which can be translated into 2 coupled first-order differential equations to make it easier to code:
 
-$$\frac{d\omega}{dt^} = -\frac{g}{l}\sin \theta - q \frac{d\theta}{dt} + F_D \sin (\Omega_Dt)$$
+$$\frac{d\omega}{dt} = -\frac{g}{l}\sin \theta - q \frac{d\theta}{dt} + F_D \sin (\Omega_Dt)$$
 
 $$\frac{d\theta}{dt} = \omega$$
 
