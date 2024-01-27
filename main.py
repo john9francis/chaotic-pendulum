@@ -3,7 +3,7 @@ import numpy as np
 import rk2_pendulum
 
 def main():
-  create_bifurcation_plot()
+  create_poincare_plot()
 
 
 def recreate_fig_3_5():
@@ -22,6 +22,9 @@ def recreate_fig_3_5():
   pendulum = rk2_pendulum.Pendulum(fDriving, fDamping, omegaDriving)
   pendulum.run_rk2(20)
   plt.plot(pendulum.get_time_array(), pendulum.get_theta_array())
+  plt.title(f"non-chaotic driven damped pendulum Fd = {fDriving}")
+  plt.xlabel("time (s)")
+  plt.ylabel("theta (radians)")
   plt.show()
 
 def recreate_fig_3_6():
@@ -46,6 +49,9 @@ def recreate_fig_3_6():
 
   pendulum.run_rk2(simulationTime, th_initial=theta_i)
   plt.plot(pendulum.get_time_array(), pendulum.get_theta_array())
+  plt.title(f"Chaotic driven damped pendulum Fd = {fDriving}")
+  plt.xlabel("time (s)")
+  plt.ylabel("theta (radians)")
   plt.show()
 
 
@@ -73,6 +79,9 @@ def recreate_fig_3_8():
 
   pendulum.run_rk2(simulationTime, th_initial=theta_i)
   plt.plot(pendulum.get_theta_array(), pendulum.get_omega_array(), "r,")
+  plt.title(f"Phase space plot for the chaotic pendulum Fd = {fDriving}")
+  plt.xlabel("theta (radians)")
+  plt.ylabel("omega (radians/s)")
   plt.show()
 
 
@@ -105,6 +114,9 @@ def create_poincare_plot():
 
   # now plot
   plt.plot(pendulum.get_theta_array(), pendulum.get_omega_array(), 'g.')
+  plt.title(f"Poincare plot, Fd = {fDriving}")
+  plt.xlabel("theta (radians)")
+  plt.ylabel("omega (radians/s)")
   plt.show()
 
 
@@ -126,6 +138,9 @@ def plot_theta_vs_time(fd):
   pendulum.run_rk2(simulationTime, th_initial=theta_i)
 
   plt.plot(pendulum.get_time_array(), pendulum.get_theta_array(),)
+  plt.title(f"Driving force: {fd}")
+  plt.xlabel("time (s)")
+  plt.ylabel("theta (radians)")
   plt.show()
 
 
@@ -179,6 +194,7 @@ def create_bifurcation_plot():
     pendulum.reset()
 
   # show plot
+  plt.title("Bifurcation diagram")
   plt.xlabel("Fd")
   plt.ylabel("theta (radians)")
   plt.show()
