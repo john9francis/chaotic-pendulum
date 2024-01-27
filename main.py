@@ -4,8 +4,7 @@ import rk2_pendulum
 
 def main():
   
-  create_poincare_plot()
-
+  plot_theta_vs_time(1.35)
   pass
 
 def recreate_fig_3_5():
@@ -111,6 +110,27 @@ def create_poincare_plot():
   plt.show()
 
 
+def plot_theta_vs_time(fd):
+  # define our driving and damping forces
+  fDamping = .5
+  omegaDriving = 2/3
+  pendulumLength = 9.8
+  simulationTime = 100
+  theta_i = .2
+
+  # initialize our pendulum
+  pendulum = rk2_pendulum.Pendulum(fd, fDamping, omegaDriving)
+
+  # set parameters
+  pendulum.set_length(pendulumLength)
+  pendulum.set_reset_theta(True)
+
+  pendulum.run_rk2(simulationTime, th_initial=theta_i)
+
+  plt.plot(pendulum.get_time_array(), pendulum.get_theta_array(),)
+  plt.show()
+
+
 def create_bifurcation_plot():
   '''
   This run will be more computationally expensive.
@@ -122,18 +142,49 @@ def create_bifurcation_plot():
   Finally, plot Fd vs. theta.
   '''
 
-  fDriving = 1.2
+  fd_initial = 1.35
+  fd_final = 1.5
   fDamping = .5
   omegaDriving = 2/3
+  pendulumLength = 9.8
+  theta_i = .2
 
-  thetas = []
-  fds = []
+  total_runs = 100
+  runs_to_keep = 40
 
-  pendulum = rk2_pendulum.Pendulum(fDriving, fDamping, omegaDriving)
+  fds = np.linspace(fd_initial, fd_final, 100)
 
-  # do 400 rounds while omega is in phase with t
-  n = 1
-  #while n < 400:
+  # init pendulum
+  pendulum = rk2_pendulum.Pendulum(fd_initial, fDamping, omegaDriving)
+  pendulum.set_length(pendulumLength)
+
+  # start looping through fd's
+  for fd in fds:
+    # set driving force to fd
+    pendulum.set_params(fd, fDamping, omegaDriving)
+
+    # run a poincare simulation
+    pendulum.run_poincare(total_runs, th_initial=theta_i)
+
+    # discard the first data points to remove randomness
+    thetas = pendulum.get_theta_array()[runs_to_keep:]
+
+    # plot points
+    for theta in thetas:
+      plt.plot(fd, theta, '.')
+
+    # print something so we know it's working
+    print(f"{fd} done plotting")
+
+    # now reset the pendulum
+    pendulum.reset()
+
+  # show plot
+  plt.xlabel("Fd")
+  plt.ylabel("theta (radians)")
+  plt.show()
+
+
 
 
 if __name__ == "__main__":
