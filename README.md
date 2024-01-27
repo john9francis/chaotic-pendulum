@@ -42,7 +42,9 @@ One interesting pattern that has been found in chaos theory is the poincare plot
 ![poincare plot](outputs/poincare.png)
 
 # The bifurcation graph
-A natural question to arise is, "at what frequency does chaos start to occur?" We can determine this with the use of a bifurcation plot. The bifurcation plot is a plot where 
+A natural question to arise is, "at what frequency does chaos start to occur?" We can determine this with the use of a bifurcation plot. The bifurcation plot is a plot of poincare data, or only data where the driving force is in phase with time. It also plots theta vs. time instead of theta vs. omega. From this plot we see the theta vs. time is at the same point every time for lower driving forces, even though there is chaos at those values. However, when we increase driving force, the plot diverges into two branches. As we continue to increase driving force, the plot diverges even more until eventually it is in true chaos. 
+
+![bifurcation plot for driving forces 1.35 to 1.5](outputs/bifurcation.png)
 
 # Coding this problem
 
