@@ -3,7 +3,7 @@ import numpy as np
 import rk2_pendulum
 
 def main():
-  create_poincare_plot()
+  recreate_fig_3_6()
 
 
 def recreate_fig_3_5():
@@ -34,7 +34,7 @@ def recreate_fig_3_6():
   changes the outcome. 
   '''
   # define our driving and damping forces
-  fDriving = 1.2
+  fDriving = 1.2001
   fDamping = .5
   omegaDriving = 2/3
   pendulumLength = 9.8
