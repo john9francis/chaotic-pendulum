@@ -140,9 +140,9 @@ class Pendulum:
       # keep theta between -pi and pi if desired
       if self.reset_theta:
         if theta > np.pi:
-          theta -= np.pi
+          theta -= 2*np.pi
         if theta < -np.pi:
-          theta += np.pi
+          theta += 2*np.pi
 
       self.thetas.append(theta)
       self.omegas.append(omega)
