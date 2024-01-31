@@ -1,7 +1,7 @@
 # This file is an animated demonstration of a driven-damped pendulum
 
 import pygame
-import math
+import numpy as np
 
 # my own classes
 class Theta:
@@ -69,7 +69,7 @@ while running:
             running = False
 
     # Update pendulum motion equations
-    alpha = -g / length * math.sin(theta) - f_damping * omega + f_driving * math.sin(omega_driving * time)
+    alpha = -g / length * np.sin(theta) - f_damping * omega + f_driving * np.sin(omega_driving * time)
     omega += alpha * dt
     theta += omega * dt
 
@@ -82,13 +82,13 @@ while running:
 
     scaled_length = scale_factor * length
 
-    pendulum_x = width // 2 + scaled_length * math.sin(theta)
-    pendulum_y = height // 2 + scaled_length * math.cos(theta) + y_shift
+    pendulum_x = width // 2 + scaled_length * np.sin(theta)
+    pendulum_y = height // 2 + scaled_length * np.cos(theta) + y_shift
     pygame.draw.line(screen, white, (width // 2, height // 2 + y_shift), (pendulum_x, pendulum_y), 5)
     pygame.draw.circle(screen, white, (int(pendulum_x), int(pendulum_y)), 15)
 
     # draw theta graph
-    theta_pos = pygame.Vector2(width // 2, height // 2 - scaled_length/2 * math.cos(theta) - 200)
+    theta_pos = pygame.Vector2(width // 2, height // 2 - scaled_length/2 * np.cos(theta) - 200)
     th = Theta(theta_pos)
     thetas.append(th)
 

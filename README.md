@@ -46,13 +46,22 @@ A natural question to arise is, "at what driving force does the chaos start to o
 
 ![bifurcation plot for driving forces 1.35 to 1.5](outputs/bifurcation.png)
 
-# Coding this problem
+# Code explanation
 
 This code features a second order runge-kutta method to find the position of the pendulum at the next theta. There is a class, "Pendulum" that handles most of the logic. 
 
+**Main.py**
+This file runs a simulation of your choice. There are functions to recreate each of the figures in the text like 3.6, 3.8, etc.
+
+**rk2_pendulum.py**
+Features a pendulum class. This class has member variables such as driving force, damping force, pendulum length, etc. It also has methods to generate a list of position vs. time using a second order runge kutta method. Using this method there is also a method that creates poincare data. 
+
+**pendulum_demo.py**
+Uses pygame to display the pendulum in real time like an animation. This file is for demo purposes but not to generate accurate data. This demo uses euler's method which is slightly less accurate than runge kutta. 
+
 # Development environment
 
-This simulation is coded in Python, using numpy and matplotlib libraries.
+This simulation is coded in Python, using numpy, matplotlib, and pygame libraries.
 
 How to install using python virtual environment (windows):
 
