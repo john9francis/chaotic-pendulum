@@ -39,14 +39,16 @@ red = (255, 0, 0)
 
 
 # Pendulum parameters
+g = 9.8
 length = 9.8
+
 theta = .2
 omega = 0
 alpha = 0
-g = 9.8
-damping = .5
-amplitude = 1.2
-frequency = 2/3
+
+f_damping = .5
+f_driving = 1.2
+omega_driving = 2/3
 
 # make a list of thetas
 thetas = []
@@ -67,7 +69,7 @@ while running:
             running = False
 
     # Update pendulum motion equations
-    alpha = -g / length * math.sin(theta) - damping * omega + amplitude * math.sin(frequency * time)
+    alpha = -g / length * math.sin(theta) - f_damping * omega + f_driving * math.sin(omega_driving * time)
     omega += alpha * dt
     theta += omega * dt
 
