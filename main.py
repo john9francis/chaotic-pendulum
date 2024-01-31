@@ -3,7 +3,7 @@ import numpy as np
 import rk2_pendulum
 
 def main():
-  create_poincare_plot()
+  create_bifurcation_plot(0, 1.7)
   pass
 
 
@@ -100,7 +100,7 @@ def recreate_fig_3_8():
   plt.show()
 
 
-def create_poincare_plot():
+def create_poincare_plot(f_driving=1.2):
   '''
   This is another theta vs omega plot, but only at times
   when time is "in phase" with the driving force. this means
@@ -108,7 +108,7 @@ def create_poincare_plot():
   in our case, we will plot when abs(t - 2npi/omegad) < dt/2.
   '''
   # define our driving and damping forces
-  fDriving = 1.2
+  fDriving = f_driving
   fDamping = .5
   omegaDriving = 2/3
   pendulumLength = 9.8
@@ -169,7 +169,7 @@ def recreate_fig_3_10(fd=1.4):
 
 
 
-def create_bifurcation_plot():
+def create_bifurcation_plot(fd_i=1.35, fd_f=1.5):
   '''
   This run will be more computationally expensive.
   We need to do a run for 400 drive periods, or until
@@ -180,8 +180,8 @@ def create_bifurcation_plot():
   Finally, plot Fd vs. theta.
   '''
 
-  fd_initial = 1.35
-  fd_final = 1.49
+  fd_initial = fd_i
+  fd_final = fd_f
   fDamping = .5
   omegaDriving = 2/3
   pendulumLength = 9.8
